@@ -20,7 +20,7 @@ console.log(Boolean(test));
 
 let arr = [2, 3, 5, 8];
 let sum = 1;
-for (let i = 0; i<arr.length; i++) {
+for (let i = 0; i < arr.length; i++) {
     sum *= arr[i];
 }
 console.log(sum);
@@ -34,9 +34,43 @@ for (let i = 0; i < arr1.length; i++) {
 
 let arr2 = [2, 5, 8, 15, 0, 6, 20, 3];
 for (let i = 0; i < arr2.length; i++) {
-    if ( arr2[i] % 2 === 0 ) {
+    if (arr2[i] % 2 === 0) {
         console.log(arr2[i]);
     }
 }
+
+/*
+Числа, кратные 3 или 5
+Если выписать все натуральные числа меньше 10, кратные 3 или 5,
+то получим 3, 5, 6 и 9. Сумма этих чисел равна 23.
+Найдите сумму всех чисел меньше 1000, кратных 3 или 5.
+*/
+
+let n = 0;
+let m = 1000;
+let sum1 = 0;
+for (let i = n; i < m; i++) {
+    if (i % 3 == 0 || i % 5 == 0) {
+        sum1 += i;
+    }
+}
+console.log(sum1);
+
+const fizzBuzz = num => {
+    for (let i = 1; i <= num; i++) {
+        if (i % 3 == 0 && i % 5 == 0) {
+            console.log('fizzbuzz');
+        } else if (i % 3 == 0) {
+            console.log('fizz');
+        } else if (i % 5 == 0) {
+            console.log('buzz');
+        } else {
+            console.log(i);
+        }
+    }
+}
+
+console.log(fizzBuzz(11));
+
 
 
