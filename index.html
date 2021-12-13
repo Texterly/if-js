@@ -9,6 +9,26 @@
     <script src="main.js"></script>
 </head>
 <body>
+    <p id="text1">Text 1</p>
+    <p id="text2">Text 2</p>
+    <p id="text3">Text 3</p>
+    <script>
+        const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
 
+        let getPainted = function () {
+            let c = 0;
+            return function () {
+                event.target.style.color = colors[c];
+                c++;
+                if (c === colors.length) {
+                    c = 0;
+                }
+            }
+        }
+
+        document.getElementById("text1").addEventListener("click", getPainted());
+        document.getElementById("text2").addEventListener("click", getPainted());
+        document.getElementById("text3").addEventListener("click", getPainted());
+    </script>
 </body>
 </html>

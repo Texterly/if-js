@@ -170,6 +170,33 @@ const result = [1, 2, 2, 3, 3, 3, 3].reduce((x, y) => x.includes(y) ? x : [...x,
 
 console.log(result);
 
+// lesson-4
+//
+// Напишите функцию sum, которая возвращает сумму чисел следующим образом:
+//     console.log(sum(5)(2)); // 7
 
+function curry (f) {
+    return function (a) {
+        return function (b) {
+            return f (a, b);
+        }
+    }
+}
 
+function newSum (a, b) {
+    return a + b;
+}
 
+let sum = curry (newSum);
+console.log(sum(5)(2)); // 7
+
+// Покрасьте абзацы по клику (событие click):
+// даны 3 абзаца:
+//     <p id="text1">Text 1</p>
+// <p id="text2">Text 2</p>
+// <p id="text3">Text 3</p>
+// дан массив цветов:
+//     const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+// по первому нажатию на абзац он должен покраситься в первый цвет из массива, по второму нажатию - во второй и так далее;
+// цвета из массива меняются бесконечно;
+// все абзацы работают независимо.
