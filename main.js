@@ -208,7 +208,7 @@ For example, with n = 7 and k = 3, the array [1,2,3,4,5,6,7]
 is rotated to [5,6,7,1,2,3,4]. How many different ways do you know
 to solve this problem?
  */
-
+// 1-й способ
 const array = [1, 2, 3, 4, 5, 6, 7];
 console.log(array);
 
@@ -219,3 +219,95 @@ const rotateArray = (randomArray, k) => {
     return randomArray;
 }
 console.log(rotateArray(array,3));
+
+// 2-й способ
+let n = 7;
+let k = 13;
+let initialArray = [];
+for (let i = 1; i <= n; i++) {
+    initialArray.push(i);
+}
+console.log("Первоначальный массив: " + initialArray);
+let count = k - (n * Math.trunc(k / n));
+arrRotate = initialArray.splice(initialArray.length - count, count);
+initialArray.unshift(...arrRotate);
+console.log("Полученный массив: " + initialArray);
+
+// lesson-5
+
+// Преобразование формата даты:
+//     в переменной date лежит дата в формате '2020-11-26';
+// преобразуйте эту дату в формат '26.11.2020';
+// функция должна быть универсальной, т.е. принимать любую дату и приводить ее к поставленному в задании формату.
+
+let date = `2020-11-26`;
+
+function rotateDate () {
+    date = date.split(`-`).reverse().join(`.`);
+    return date;
+}
+console.log(rotateDate(date))
+
+// Поиск объектов размещения:
+//     дан массив;
+// напишите функцию поиска, которая будет принимать строку;
+// по полученной строке найдите все совпадения в массива;
+// верните список строк в формате: страна, город, отель.
+
+const data = [
+    {
+        country: 'Russia',
+        city: 'Saint Petersburg',
+        hotel: 'Hotel Leopold',
+    },
+    {
+        country: 'Spain',
+        city: 'Santa Cruz de Tenerife',
+        hotel: 'Apartment Sunshine',
+    },
+    {
+        country: 'Slowakia',
+        city: 'Vysokie Tatry',
+        hotel: 'Villa Kunerad',
+    },
+    {
+        country: 'Germany',
+        city: 'Berlin',
+        hotel: 'Hostel Friendship',
+    },
+    {
+        country: 'Indonesia',
+        city: 'Bali',
+        hotel: 'Ubud Bali Resort&SPA',
+    },
+    {
+        country: 'Netherlands',
+        city: 'Rotterdam',
+        hotel: 'King Kong Hostel',
+    },
+    {
+        country: 'Marocco',
+        city: 'Ourika',
+        hotel: 'Rokoko Hotel',
+    },
+    {
+        country: 'Germany',
+        city: 'Berlin',
+        hotel: 'Hotel Rehberge Berlin Mitte',
+    },
+];
+
+let array = [];
+let str;
+let n;
+function search (string) {
+    for (let i = 0; i < data.length; i++) {
+        str = Object.values(data[i]);
+        n = str.includes(string);
+        if (n === true) {
+            array = data[i];
+            return array
+        }
+    }
+}
+console.log(search('Rotterdam'))
