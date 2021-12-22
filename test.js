@@ -22,4 +22,50 @@
 //     expect(palindrom('Шалаш')).toBe(true);
 // })
 
-const  searchCountries = require
+// const  deepEqual = require('./main');
+//
+// test('comparison objects', () => {
+//     expect(deepEqual({
+//         a: 'a',
+//         b: {
+//             a: 'a',
+//             b: 'b',
+//             c: {
+//                 a: 1,
+//             },
+//         },
+//     }, {
+//         b: {
+//             c: {
+//                 a: 1,
+//             },
+//             b: 'b',
+//                 a: 'a',
+//         },
+//         a: 'a',
+//     })).toBe(true);
+// })
+
+// const  deepEqual = require('./main');
+//
+// test('comparison objects', () => {
+//     expect(deepEqual({
+//         a: 'a',
+//         b: {
+//             a: 'a',
+//             b: 'b',
+//             c: {
+//                 a: 1,
+//             },
+//         },
+//     }, {
+//         a: {
+//             c: {
+//                 a: 'a',
+//             },
+//             b: 'b',
+//             a: 'a',
+//         },
+//         b: 'b',
+//     })).toBe(false);
+// })
