@@ -793,7 +793,10 @@ class Student extends User {
         this.admissionYear = admissionYear;
         this.courseName = courseName;
     }
-    
+    fullName() {
+        return super.fullName();
+    }
+
     course() {
         return `${2021 - this.admissionYear} курс`
     }
