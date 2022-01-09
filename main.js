@@ -773,6 +773,7 @@
 // console.log(getCalendarMonth(29,7,5))
 
 // lesson-8
+const currentYear = 2021;
 
 class User {
     constructor(firstName, lastName) {
@@ -780,64 +781,67 @@ class User {
         this.lastName = lastName;
     }
 
-    fullName() {
+    get fullName() {
         return `${this.firstName} ${this.lastName}`;
     }
 }
 
-
-
 class Student extends User {
-    constructor(admissionYear, courseName) {
-        super();
+    constructor({firstName, lastName, admissionYear, courseName}) {
+        super(firstName, lastName);
         this.admissionYear = admissionYear;
         this.courseName = courseName;
     }
-    fullName() {
-        return super.fullName();
-    }
 
-    course() {
-        return `${2021 - this.admissionYear} курс`
+    get course() {
+        return `${currentYear - this.admissionYear} курс`;
     }
 }
-
-
-
-const vasia = new Student(2019, 'Java')
-vasia.firstName = 'Василий';
-vasia.lastName = 'Петров';
-vasia.fullName();
-vasia.course();
-console.log(vasia.fullName(), vasia.course())
-const vania = new Student(2018, 'JavaScript')
-vania.firstName = 'Иван';
-vania.lastName = 'Иванов';
-vania.fullName();
-
-const sasha = new Student(2017, 'Python')
-sasha.firstName = 'Александр';
-sasha.lastName = 'Фёдоров';
-sasha.fullName();
-
-const kolia = new Student(2019, 'Android')
-kolia.firstName = 'Николай';
-kolia.lastName = 'Петров';
-kolia.fullName();
-
-const studentsData = [vasia, vania, sasha, kolia];
 
 class Students {
-    constructor(studentsData) {
-        this.studentsData = studentsData;
+    constructor(students) {
+        this.studenrs = students;
     }
-    getInfo() {
-        return console.log(`${fullName} - ${courseName}, ${course} курс`);
+
+    getInfo(students) {
+        const result = [];
+        instancesStudents.sort((a, b) => a.course > b.course ? 1 : -1);
+        for (let i = 0; i < instancesStudents.length; i++) {
+            result.push(`${instancesStudents[i].fullName} - ${instancesStudents[i].courseName}, ${instancesStudents[i].course}`);
+        }
+        return result;
     }
 }
-console.log(vasia, vania, sasha, kolia)
-console.log(studentsData)
+const studentsData = [
+    {
+        firstName: 'Василий',
+        lastName: 'Петров',
+        admissionYear: 2019,
+        courseName: 'Java',
+    },
+    {
+        firstName: 'Иван',
+        lastName: 'Иванов',
+        admissionYear: 2018,
+        courseName: 'JavaScript',
+    },
+    {
+        firstName: 'Александр',
+        lastName: 'Федоров',
+        admissionYear: 2017,
+        courseName: 'Python',
+    },
+    {
+        firstName: 'Николай',
+        lastName: 'Петров',
+        admissionYear: 2019,
+        courseName: 'Android',
+    }
+];
 
-const students = new Students(studentsData);
+const instancesStudents = studentsData.map(student => new Student(student));
+const students = new Students(instancesStudents);
 
-console.log(students.getInfo())
+console.log(students.getInfo());
+
+
