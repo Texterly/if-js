@@ -34,11 +34,12 @@
         // lesson-9
         const colors = {
             data: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
-            [Symbol.iterator]() {
-                return {
-                 next() {
-                     return { value: this.data++, done: false};
-                 }
+        }
+
+        colors[Symbol.iterator] = function () {
+            return {
+                next() {
+                    return {value: this.data++, done: false};
                 }
             }
         }
@@ -48,6 +49,7 @@
             event.target.style.color = colors.next(id).value;
         };
 
+        document.getElementById("text1").addEventListener(changeStyle("text1"));
     </script>
 </body>
 </html>
