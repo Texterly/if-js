@@ -746,7 +746,7 @@
 // // создайте функцию getCalendarMonth, которая принимает количество дней в месяце, количество дней в неделе и день недели, на который выпадает первый день месяца;
 // // свободные дни (до первого дня месяца и после последнего дня месяца, пока считаем, что в каждом месяце равное количество дней) заполните днями предыдущего месяца или последующего;
 // // выбросьте ошибку, если переданный день недели больше, чем количество дней.
-//
+// //
 // const result = [];
 // // const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
 // function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
@@ -754,7 +754,7 @@
 //     if (daysInMonth === 28) {
 //         weekInMonth = 5;
 //     }
-//     const arrDays = [];
+//     const arrDays = []  ;
 //     for (let i = 1; i <= daysInMonth; i++) {
 //         arrDays.push(String(i))
 //     }
@@ -772,8 +772,7 @@
 //
 // console.log(getCalendarMonth(29,7,5))
 
-// lesson-8
-const currentYear = 2021;
+// // lesson-8
 
 class User {
     constructor(firstName, lastName) {
@@ -793,23 +792,29 @@ class Student extends User {
         this.courseName = courseName;
     }
 
+    get fullName() {
+        return super.fullName;
+    }
+
     get course() {
-        return `${currentYear - this.admissionYear} курс`;
+        const currentYear = new Date().getFullYear();
+        return `${currentYear - this.admissionYear}`;
     }
 }
 
 class Students {
     constructor(students) {
-        this.studenrs = students;
+        this.students = students;
     }
 
-    getInfo(students) {
-        const result = [];
-        instancesStudents.sort((a, b) => a.course > b.course ? 1 : -1);
-        for (let i = 0; i < instancesStudents.length; i++) {
-            result.push(`${instancesStudents[i].fullName} - ${instancesStudents[i].courseName}, ${instancesStudents[i].course}`);
-        }
-        return result;
+    sortByCourse = () => this.students.sort((a,b) => a.course - b.course);
+
+    getInfo() {
+        return this.students.forEach((student) => {
+            console.log(
+            `${student.fullName} - ${student.courseName}, ${student.course}`
+            );
+        });
     }
 }
 const studentsData = [
@@ -839,9 +844,10 @@ const studentsData = [
     }
 ];
 
-const instancesStudents = studentsData.map(student => new Student(student));
-const students = new Students(instancesStudents);
+const studentInstances = studentsData.map((student) => new Student(student));
+const students = new Students(studentInstances);
+students.sortByCourse();
+students.getInfo();
 
-console.log(students.getInfo());
 
 
