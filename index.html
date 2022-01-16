@@ -12,23 +12,44 @@
     <p id="text1">Text 1</p>
     <p id="text2">Text 2</p>
     <p id="text3">Text 3</p>
-    <script>
-        const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
 
-        let getPainted = function () {
-            let c = 0;
-            return function () {
-                event.target.style.color = colors[c];
-                c++;
-                if (c === colors.length) {
-                    c = 0;
+    <script>
+        // const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+
+        // let getPainted = function () {
+        //     let c = 0;
+        //     return function () {
+        //         event.target.style.color = colors[c];
+        //         c++;
+        //         if (c === colors.length) {
+        //             c = 0;
+        //         }
+        //     }
+        // }
+        //
+        // document.getElementById("text1").addEventListener("click", getPainted());
+        // document.getElementById("text2").addEventListener("click", getPainted());
+        // document.getElementById("text3").addEventListener("click", getPainted());
+
+        // lesson-9
+        const colors = {
+            data: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
+        }
+
+        colors[Symbol.iterator] = function () {
+            return {
+                next() {
+                    return {value: this.data++, done: false};
                 }
             }
         }
 
-        document.getElementById("text1").addEventListener("click", getPainted());
-        document.getElementById("text2").addEventListener("click", getPainted());
-        document.getElementById("text3").addEventListener("click", getPainted());
+
+        const changeStyle = id => event => {
+            event.target.style.color = colors.next(id).value;
+        };
+
+        document.getElementById("text1").addEventListener(changeStyle("text1"));
     </script>
 </body>
 </html>

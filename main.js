@@ -686,88 +686,168 @@
 //
 // Напишите функция deepEqual, которая сможет сравнивать 2 объекта с разными уровнями вложенности.
 
-const obj1 = {
-    a: 'a',
-    b: {
-        a: 'a',
-        b: 'b',
-        c: {
-            a: 1,
-        },
-    },
-};
-const obj2 = {
-    b: {
-        c: {
-            a: 1,
-        },
-        b: 'b',
-        a: 'a',
-    },
-    a: 'a',
-};
-const obj3 = {
-    a: {
-        c: {
-            a: 'a',
-        },
-        b: 'b',
-        a: 'a',
-    },
-    b: 'b',
-};
+// const obj1 = {
+//     a: 'a',
+//     b: {
+//         a: 'a',
+//         b: 'b',
+//         c: {
+//             a: 1,
+//         },
+//     },
+// };
+// const obj2 = {
+//     b: {
+//         c: {
+//             a: 1,
+//         },
+//         b: 'b',
+//         a: 'a',
+//     },
+//     a: 'a',
+// };
+// const obj3 = {
+//     a: {
+//         c: {
+//             a: 'a',
+//         },
+//         b: 'b',
+//         a: 'a',
+//     },
+//     b: 'b',
+// };
+//
+// const deepEqual = (object1, object2) => {
+//     if (object1 === null || object2 === null || typeof(object1) !== "object" || typeof(object2) !== "object") {
+//         return false;
+//     }
+//     const prop1 = Object.keys(object1);
+//     const prop2 = Object.keys(object2);
+//     if (prop1.length !== prop2.length) {
+//         return false;
+//     }
+//     for (let i = 0; i < prop1.length; i++) {
+//         const prop = prop1[i];
+//         const bothObject = typeof(object1[prop]) === 'object' && typeof(object2[prop]) === 'object';
+//
+//         if ((!bothObject && (object1[prop] !== object2[prop]))
+//             || (bothObject && !deepEqual(object1[prop], object2[prop]))) {
+//             return false
+//         }
+//     }
+//     return true;
+// }
+//
+// console.log(deepEqual(obj1, obj2)); // true
+// console.log(deepEqual(obj1, obj3)); // false
+//
+// module.exports = deepEqual;
+//
+// // создайте функцию getCalendarMonth, которая принимает количество дней в месяце, количество дней в неделе и день недели, на который выпадает первый день месяца;
+// // свободные дни (до первого дня месяца и после последнего дня месяца, пока считаем, что в каждом месяце равное количество дней) заполните днями предыдущего месяца или последующего;
+// // выбросьте ошибку, если переданный день недели больше, чем количество дней.
+// //
+// const result = [];
+// // const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
+// function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
+//     let weekInMonth = Math.ceil(daysInMonth/daysInWeek - 1);
+//     if (daysInMonth === 28) {
+//         weekInMonth = 5;
+//     }
+//     const arrDays = []  ;
+//     for (let i = 1; i <= daysInMonth; i++) {
+//         arrDays.push(String(i))
+//     }
+//     for (let i = 0; i < dayOfWeek; i++) {
+//         arrDays.unshift(arrDays.pop());
+//     }
+//     for (let i = 0; i < Math.ceil(arrDays.length/daysInWeek); i++) {
+//         result.push(arrDays.slice(i*daysInWeek, (i*daysInWeek) + daysInWeek));
+//     }
+//     for (let i = 0; i <= dayOfWeek; i++) {
+//         result[weekInMonth].push(arrDays[i])
+//     }
+//     return result
+// }
+//
+// console.log(getCalendarMonth(29,7,5))
 
-const deepEqual = (object1, object2) => {
-    if (object1 === null || object2 === null || typeof(object1) !== "object" || typeof(object2) !== "object") {
-        return false;
-    }
-    const prop1 = Object.keys(object1);
-    const prop2 = Object.keys(object2);
-    if (prop1.length !== prop2.length) {
-        return false;
-    }
-    for (let i = 0; i < prop1.length; i++) {
-        const prop = prop1[i];
-        const bothObject = typeof(object1[prop]) === 'object' && typeof(object2[prop]) === 'object';
+// // lesson-8
 
-        if ((!bothObject && (object1[prop] !== object2[prop]))
-            || (bothObject && !deepEqual(object1[prop], object2[prop]))) {
-            return false
-        }
+class User {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
-    return true;
+
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    }
 }
 
-console.log(deepEqual(obj1, obj2)); // true
-console.log(deepEqual(obj1, obj3)); // false
+class Student extends User {
+    constructor({firstName, lastName, admissionYear, courseName}) {
+        super(firstName, lastName);
+        this.admissionYear = admissionYear;
+        this.courseName = courseName;
+    }
 
-module.exports = deepEqual;
+    get fullName() {
+        return super.fullName;
+    }
 
-// создайте функцию getCalendarMonth, которая принимает количество дней в месяце, количество дней в неделе и день недели, на который выпадает первый день месяца;
-// свободные дни (до первого дня месяца и после последнего дня месяца, пока считаем, что в каждом месяце равное количество дней) заполните днями предыдущего месяца или последующего;
-// выбросьте ошибку, если переданный день недели больше, чем количество дней.
-
-const result = [];
-// const calendarMonth = getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek);
-function getCalendarMonth(daysInMonth, daysInWeek, dayOfWeek) {
-    let weekInMonth = Math.ceil(daysInMonth/daysInWeek - 1);
-    if (daysInMonth === 28) {
-        weekInMonth = 5;
+    get course() {
+        const currentYear = new Date().getFullYear();
+        return `${currentYear - this.admissionYear}`;
     }
-    const arrDays = [];
-    for (let i = 1; i <= daysInMonth; i++) {
-        arrDays.push(String(i))
-    }
-    for (let i = 0; i < dayOfWeek; i++) {
-        arrDays.unshift(arrDays.pop());
-    }
-    for (let i = 0; i < Math.ceil(arrDays.length/daysInWeek); i++) {
-        result.push(arrDays.slice(i*daysInWeek, (i*daysInWeek) + daysInWeek));
-    }
-    for (let i = 0; i <= dayOfWeek; i++) {
-        result[weekInMonth].push(arrDays[i])
-    }
-    return result
 }
 
-console.log(getCalendarMonth(29,7,5))
+class Students {
+    constructor(students) {
+        this.students = students;
+    }
+
+    sortByCourse = () => this.students.sort((a,b) => a.course - b.course);
+
+    getInfo() {
+        return this.students.forEach((student) => {
+            console.log(
+            `${student.fullName} - ${student.courseName}, ${student.course}`
+            );
+        });
+    }
+}
+const studentsData = [
+    {
+        firstName: 'Василий',
+        lastName: 'Петров',
+        admissionYear: 2019,
+        courseName: 'Java',
+    },
+    {
+        firstName: 'Иван',
+        lastName: 'Иванов',
+        admissionYear: 2018,
+        courseName: 'JavaScript',
+    },
+    {
+        firstName: 'Александр',
+        lastName: 'Федоров',
+        admissionYear: 2017,
+        courseName: 'Python',
+    },
+    {
+        firstName: 'Николай',
+        lastName: 'Петров',
+        admissionYear: 2019,
+        courseName: 'Android',
+    }
+];
+
+const studentInstances = studentsData.map((student) => new Student(student));
+const students = new Students(studentInstances);
+students.sortByCourse();
+students.getInfo();
+
+
+
