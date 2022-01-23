@@ -774,80 +774,149 @@
 
 // // lesson-8
 
-class User {
-    constructor(firstName, lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+// class User {
+//     constructor(firstName, lastName) {
+//         this.firstName = firstName;
+//         this.lastName = lastName;
+//     }
+//
+//     get fullName() {
+//         return `${this.firstName} ${this.lastName}`;
+//     }
+// }
+//
+// class Student extends User {
+//     constructor({firstName, lastName, admissionYear, courseName}) {
+//         super(firstName, lastName);
+//         this.admissionYear = admissionYear;
+//         this.courseName = courseName;
+//     }
+//
+//     get fullName() {
+//         return super.fullName;
+//     }
+//
+//     get course() {
+//         const currentYear = new Date().getFullYear();
+//         return `${currentYear - this.admissionYear}`;
+//     }
+// }
+//
+// class Students {
+//     constructor(students) {
+//         this.students = students;
+//     }
+//
+//     sortByCourse = () => this.students.sort((a,b) => a.course - b.course);
+//
+//     getInfo() {
+//         return this.students.forEach((student) => {
+//             console.log(
+//             `${student.fullName} - ${student.courseName}, ${student.course}`
+//             );
+//         });
+//     }
+// }
+// const studentsData = [
+//     {
+//         firstName: 'Василий',
+//         lastName: 'Петров',
+//         admissionYear: 2019,
+//         courseName: 'Java',
+//     },
+//     {
+//         firstName: 'Иван',
+//         lastName: 'Иванов',
+//         admissionYear: 2018,
+//         courseName: 'JavaScript',
+//     },
+//     {
+//         firstName: 'Александр',
+//         lastName: 'Федоров',
+//         admissionYear: 2017,
+//         courseName: 'Python',
+//     },
+//     {
+//         firstName: 'Николай',
+//         lastName: 'Петров',
+//         admissionYear: 2019,
+//         courseName: 'Android',
+//     }
+// ];
+//
+// const studentInstances = studentsData.map((student) => new Student(student));
+// const students = new Students(studentInstances);
+// students.sortByCourse();
+// students.getInfo();
+//
+// Задача1
+// let arr = [5, 3, 8, 1];
+//
+//
+// function filterRange(arr, a, b) {
+//     return arr.filter(item => a <= item && b >= item);
+// };
+//
+// let filtered = filterRange(arr, 1, 4);
+//
+// console.log( filtered ); // 3,1 (совпадающие значения)
+//
+// console.log( arr ); // 5,3,8,1 (без изменений)
 
-    get fullName() {
-        return `${this.firstName} ${this.lastName}`;
-    }
+// // Задача2
+// let vasya = { name: "Вася", age: 25 };
+// let petya = { name: "Петя", age: 30 };
+// let masha = { name: "Маша", age: 28 };
+//
+// let users = [ vasya, petya, masha ];
+//
+// let names = users.map(item => item.name)
+//
+//     console.log( names ); // Вася, Петя, Маша
+
+// // Задача3
+// let vasya = { name: "Вася", surname: "Пупкин", id: 1 };
+// let petya = { name: "Петя", surname: "Иванов", id: 2 };
+// let masha = { name: "Маша", surname: "Петрова", id: 3 };
+//
+// let users = [ vasya, petya, masha ];
+//
+// let usersMapped = users.map(user => ({
+//     fullname: `${user.name} ${user.surname}`,
+//     id: user.id
+// }));
+//
+// console.log(usersMapped)
+// console.log( usersMapped[0].id ); // 1
+// console.log( usersMapped[0].fullname );
+
+// // Задача4
+// function sortByAge(arr) {
+//     arr.sort((a, b) => a.age > b.age ? 1 : -1);
+// }
+//
+// let vasya = { name: "Вася", age: 25 };
+// let petya = { name: "Петя", age: 30 };
+// let masha = { name: "Маша", age: 28 };
+//
+// let arr = [ vasya, petya, masha ];
+//
+// sortByAge(arr);
+//
+// // теперь отсортировано: [vasya, masha, petya]
+// alert(arr[0].name); // Вася
+// alert(arr[1].name); // Маша
+// alert(arr[2].name); // Петя
+
+// Задача5
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 29 };
+
+let arr = [ vasya, petya, masha ];
+
+function getAverageAge(users) {
+  return users.reduce((prev, user) => prev + user.age, 0) / users.length;
 }
 
-class Student extends User {
-    constructor({firstName, lastName, admissionYear, courseName}) {
-        super(firstName, lastName);
-        this.admissionYear = admissionYear;
-        this.courseName = courseName;
-    }
-
-    get fullName() {
-        return super.fullName;
-    }
-
-    get course() {
-        const currentYear = new Date().getFullYear();
-        return `${currentYear - this.admissionYear}`;
-    }
-}
-
-class Students {
-    constructor(students) {
-        this.students = students;
-    }
-
-    sortByCourse = () => this.students.sort((a,b) => a.course - b.course);
-
-    getInfo() {
-        return this.students.forEach((student) => {
-            console.log(
-            `${student.fullName} - ${student.courseName}, ${student.course}`
-            );
-        });
-    }
-}
-const studentsData = [
-    {
-        firstName: 'Василий',
-        lastName: 'Петров',
-        admissionYear: 2019,
-        courseName: 'Java',
-    },
-    {
-        firstName: 'Иван',
-        lastName: 'Иванов',
-        admissionYear: 2018,
-        courseName: 'JavaScript',
-    },
-    {
-        firstName: 'Александр',
-        lastName: 'Федоров',
-        admissionYear: 2017,
-        courseName: 'Python',
-    },
-    {
-        firstName: 'Николай',
-        lastName: 'Петров',
-        admissionYear: 2019,
-        courseName: 'Android',
-    }
-];
-
-const studentInstances = studentsData.map((student) => new Student(student));
-const students = new Students(studentInstances);
-students.sortByCourse();
-students.getInfo();
-
-
-
+console.log( getAverageAge(arr) ); // (25 + 30 + 29) / 3 = 28
