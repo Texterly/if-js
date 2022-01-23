@@ -33,23 +33,33 @@
 
         // lesson-9
         const colors = {
-            data: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
-        }
-
-        colors[Symbol.iterator] = function () {
-            return {
-                next() {
-                    return {value: this.data++, done: false};
-                }
-            }
-        }
-
-
-        const changeStyle = id => event => {
-            event.target.style.color = colors.next(id).value;
+            data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
+            [Symbol.iterator]() {
+                const arr = this.data;
+                return {
+                    next(index) {
+                        return {
+                            value: arr[index],
+                            done: index === arr.length,
+                        };
+                    },
+                };
+            },
         };
-
-        document.getElementById("text1").addEventListener(changeStyle("text1"));
+        function changeStyle() {
+            let i = 0;
+            return function () {
+                let iterator = colors[Symbol.iterator]();
+                this.style.color = iterator.next(i).value;
+                i++;
+                if (iterator.next(i).done) {
+                    i = 0;
+                }
+            };
+        }
+        document.getElementById("text1").addEventListener("click", changeStyle());
+        document.getElementById("text2").addEventListener("click", changeStyle());
+        document.getElementById("text3").addEventListener("click", changeStyle());
     </script>
 </body>
 </html>
