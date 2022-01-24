@@ -51,37 +51,46 @@ const data = [
     },
 ];
 
-const homesGroupItems = document.getElementsByClassName('homes');
+const homesBody = document.getElementById('homes-body');
 
-function createHomeItems (data, index) {
-    const containerBlocks = document.createElement('div');
-    containerBlocks.classList.add('container-blocks', 'col-6', 'col-s-12');
-    const containerBlocksImg = document.createElement('img');
-    containerBlocksImg.setAttribute('src', data[index].imageUrl);
-    containerBlocksImg.setAttribute('alt', data[index].name);
-    containerBlocks.append(containerBlocksImg);
-    const containerBlocksTitle = document.createElement('p');
-    containerBlocksTitle.classList.add('text');
-    let containerBlocksTitleText = document.createTextNode(data[index].name);
-    containerBlocksTitle.appendChild(containerBlocksTitleText);
-    containerBlocks.append(containerBlocksTitle);
-    const containerBlocksLocation = document.createElement('p');
-    containerBlocksLocation.classList.add('text-grey');
-    let containerBlocksLocationText = document.createTextNode(`${data[index].city}, ${data[index].country}`);
-    containerBlocksLocation.appendChild(containerBlocksLocationText);
-    containerBlocks.append(containerBlocksLocation);
-    return containerBlocks;
-}
-
-function insertBlocksItem (blocksCreated) {
-    homesGroupItems.append(blocksCreated);
-}
-
-function createBlocksItems() {
-    for (let i=0; i<data.length; i++) {
-        let blocksCreated = createHomeItems(data,i);
-        insertBlocksItem(blocksCreated);
-    }
-}
-
-createBlocksItems();
+homesBody.innerHTML = data.map(i =>
+    `<div class="container-blocks">
+    <img src="${i.imageUrl}" alt="${i.name}">
+    <p class="text">${i.name}</p>
+    <p class="text-grey">${i.city}, ${i.country}</p>
+</div>`).join('');
+//
+// const homesGroupItems = document.getElementsByClassName('homes');
+//
+// function createHomeItems (data, index) {
+//     const containerBlocks = document.createElement('div');
+//     containerBlocks.classList.add('container-blocks', 'col-6', 'col-s-12');
+//     const containerBlocksImg = document.createElement('img');
+//     containerBlocksImg.setAttribute('src', data[index].imageUrl);
+//     containerBlocksImg.setAttribute('alt', data[index].name);
+//     containerBlocks.append(containerBlocksImg);
+//     const containerBlocksTitle = document.createElement('p');
+//     containerBlocksTitle.classList.add('text');
+//     let containerBlocksTitleText = document.createTextNode(data[index].name);
+//     containerBlocksTitle.appendChild(containerBlocksTitleText);
+//     containerBlocks.append(containerBlocksTitle);
+//     const containerBlocksLocation = document.createElement('p');
+//     containerBlocksLocation.classList.add('text-grey');
+//     let containerBlocksLocationText = document.createTextNode(`${data[index].city}, ${data[index].country}`);
+//     containerBlocksLocation.appendChild(containerBlocksLocationText);
+//     containerBlocks.append(containerBlocksLocation);
+//     return containerBlocks;
+// }
+//
+// function insertBlocksItem (blocksCreated) {
+//     homesGroupItems.append(blocksCreated);
+// }
+//
+// function createBlocksItems() {
+//     for (let i=0; i<data.length; i++) {
+//         let blocksCreated = createHomeItems(data,i);
+//         insertBlocksItem(blocksCreated);
+//     }
+// }
+//
+// createBlocksItems();
