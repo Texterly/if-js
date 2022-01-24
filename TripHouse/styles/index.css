@@ -916,6 +916,7 @@
 }
 .container-back .section .container .homes .container-blocks {
   width: 25%;
+  padding-right: 16px;
 }
 @media screen and (max-width: 1024px) {
   .container-back .section .container .homes .container-blocks {
@@ -984,6 +985,12 @@
   position: absolute;
   bottom: 256px;
   left: 1208px;
+}
+.container-back .section .container .homes-button .arrow-left {
+  position: absolute;
+  transform: rotate(180deg);
+  filter: drop-shadow(3px 3px 3px #383838);
+  bottom: 256px;
 }
 @media screen and (max-width: 480px) {
   .container-back .section .container .homes-button .arrow {
