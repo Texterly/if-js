@@ -267,4 +267,3 @@ fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
     .catch(err => {
         console.log('Fetch Error :-S', err);
     });
-
