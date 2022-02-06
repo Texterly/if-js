@@ -62,60 +62,42 @@
 
 // lesson-11
 
-const adult = document.getElementById('adults');
-const room = document.getElementById('rooms');
-const children = document.getElementById('children');
+// const adult = document.getElementById('adults');
+// const room = document.getElementById('rooms');
+// const children = document.getElementById('children');
+// const filter = document.getElementById('filter');
+//
+// const openMenu = () => {
+//     adult.onclick = function () {
+//         filter.style.display = "block";
+//     }
+//     children.onclick = function () {
+//         filter.style.display = "block";
+//     }
+//     room.onclick = function () {
+//         filter.style.display = "block";
+//     }
+// }
+//
+// openMenu()
+
 const filter = document.getElementById('filter');
 
-adult.onclick = function () {
-    filter.style.display = "block";
+function openHotelMenu(event) {
+    if ((event.target.closest('.filter'))
+        || (event.target.closest('.adults-input'))
+            || (event.target.closest('.children-input'))
+                || (event.target.closest('.rooms-input'))) {
+        const filter = document.getElementById('filter');
+        filter.style.display = 'block';
+    }
+    else {
+        filter.style.display = 'none';
+    }
 }
-children.onclick = function () {
-    filter.style.display = "block";
-}
-room.onclick = function () {
-    filter.style.display = "block";
-}
-
-// let count = document.getElementById('count1').innerHTML;
-//
-// const minus = document.getElementById('minus');
-// const plus = document.getElementsByClassName('plus');
-//
-// plus.onclick = function () {
-//     document.getElementById('count1').innerText++ ;
-// }
-//
-// minus.onclick = function () {
-//     document.getElementById('count1').innerText--;
-// }
+document.body.addEventListener('click', openHotelMenu);
 
 
-// const countPlus = () => {
-//     count++;
-//     console.log(count)
-// }
-// const countMinus = () => count--;
-// plus.addEventListener('click', countPlus())
-// minus.addEventListener('click', countMinus())
-// console.log(count)
-
-// let count = document.getElementById('count1');
-// let countText = document.getElementById('count1').innerHTML;
-// console.log(count.value)
-// console.log(countText)
-//
-//
-// const minus = document.getElementById('minus');
-// const plus = document.getElementById('plus');
-//
-// minus.addEventListener('click', () => {
-//     countText--;
-// })
-//
-// plus.addEventListener('click', () => {
-//     countText++ ;
-// })
 
 // вариант 1
 const allBtns = document.querySelectorAll('.btn-filter');
@@ -131,18 +113,40 @@ const formLabelAdults = document.querySelector('.adults-label');
 const formLabelChildren = document.querySelector('.children-label');
 const formLabelRooms = document.querySelector('.rooms-label');
 
+const filterAgeComment = document.querySelector('.filter-age');
+
+// function createSelect() {
+//     const selectAgeWrapper = document.createElement('div');
+//     selectAgeWrapper.classList.add('select-age-wrapper');
+//     const selectAge = document.createElement('select');
+//     selectAge.setAttribute('name', 'children-age');
+//     selectAge.classList.add('select-age');
+//
+//     for (let i = 0; i < 18; i++) {
+//         const valueOfAge = document.createElement('option');
+//         valueOfAge.setAttribute('value', `value${i} years old`);
+//         valueOfAge.innerHTML = `${i} years old`;
+//         if (i===8) {
+//             valueOfAge.setAttribute('selected', 'selected');
+//         }
+//         selectAge.append(valueOfAge);
+//     }
+//     selectAgeWrapper.append(selectAge);
+//     return selectAgeWrapper
+// }
+//
+// const putSelect = createSelect();
+// filter.append(putSelect)
+
 let counter1 = 0;
 let counter2 = 0;
 let counter3 = 0;
 
 function changeCounterAdults(event) {
-    console.log(event.target)
-    // if (event.target.classList.contains('btn-filter')) {
         if ((event.target.closest('.first-minus')) || event.target.closest('.first-plus')) {
             countAdults(event);
         }
         function countAdults(event) {
-            console.log(counter1)
             const counterDisplayElement = document.querySelector('.count1');
             if ((counter1 === 0) || (counter1 <= 30)) {
                 changeCounter1();
@@ -170,10 +174,103 @@ function changeCounterAdults(event) {
                 }
             }
         }
-    // }
+}
+
+function changeCounterChildren(event) {
+    if ((event.target.closest('.second-minus')) || event.target.closest('.second-plus')) {
+        countChildren(event);
+    }
+    function countChildren(event) {
+        const counterDisplayElement1 = document.querySelector('.count2');
+        if ((counter2 === 0) || (counter2 <= 10)) {
+            changeCounter2();
+        }
+        if (counter2 === -1) {
+            counter2 = 0;
+        }
+        if (counter2 === 11) {
+            counter2 = 10;
+        }
+        function changeCounter2 () {
+            if (event.target.closest('.second-plus')) {
+                counter2++;
+                updateDisplay();
+                const childrenSelectElement = document.createElement('select');
+                childrenSelectElement.setAttribute('name', 'children-age');
+                childrenSelectElement.classList.add('select-age');
+                for (let year = 0; year < 18; year++) {
+                    const valueOfAge = document.createElement('option');
+                    valueOfAge.setAttribute('value', `value${year} years old`);
+                    valueOfAge.innerHTML = `${year} years old`;
+                    if (year===8) {
+                        valueOfAge.setAttribute('selected', 'selected');
+                    }
+                    childrenSelectElement.append(valueOfAge);
+                }
+                filter.append(childrenSelectElement);
+            }
+            if (event.target.closest('.second-minus')) {
+                counter2--;
+                updateDisplay();
+                const deletedChildSelect = document.querySelector('.select-age')
+                filter.removeChild(deletedChildSelect);
+            }
+        }
+        function updateDisplay() {
+            if ((counter2 !== -1) && (counter2 !== 11)) {
+                counterDisplayElement1.innerHTML = counter2;
+                formLabelChildren.innerHTML = `${counter2} Children`;
+                const selectNumber = counterDisplayElement1.innerHTML;
+
+                if (selectNumber > 0) {
+                    filterAgeComment.style.display = 'block';
+                }
+                if (selectNumber === '0') {
+                    filterAgeComment.style.display = 'none';
+                }
+            }
+        }
+    }
+}
+
+function changeCounterRooms(event) {
+    if ((event.target.closest('.third-minus')) || event.target.closest('.third-plus')) {
+        countRooms(event);
+    }
+    function countRooms(event) {
+        const counterDisplayElement2 = document.querySelector('.count3');
+        if ((counter3 === 0) || (counter3 <= 30)) {
+            changeCounter3();
+        }
+        if (counter3 === -1) {
+            counter3 = 0;
+        }
+        if (counter3 === 31) {
+            counter3 = 30;
+        }
+        function changeCounter3 () {
+            if (event.target.closest('.third-plus')) {
+                counter3++;
+                updateDisplay();
+            }
+            if (event.target.closest('.third-minus')) {
+                counter3--;
+                updateDisplay();
+            }
+        }
+        function updateDisplay() {
+            if ((counter3 !== -1) && (counter3 !== 31)) {
+                counterDisplayElement2.innerHTML = counter3;
+                formLabelRooms.innerHTML = `${counter3} Rooms`;
+            }
+        }
+    }
 }
 
 allBtns.forEach((button) => button.addEventListener('click', changeCounterAdults));
+allBtns.forEach((button) => button.addEventListener('click', changeCounterChildren));
+allBtns.forEach((button) => button.addEventListener('click', changeCounterRooms));
+
 
 // const event = new Event('click');
 // firstPlus.dispatchEvent(event);
@@ -184,72 +281,6 @@ allBtns.forEach((button) => button.addEventListener('click', changeCounterAdults
 // thirdMinus.dispatchEvent(event);
 // document.body.dispatchEvent(event);
 
-// // вариант 2
-//
-// const formLabelAdults = document.querySelector('.adults-label');
-// const formLabelChildren = document.querySelector('.children-label');
-// const formLabelRooms = document.querySelector('.rooms-label');
-//
-// const minusBtns = document.querySelectorAll('.minus');
-// const plusBtns = document.querySelectorAll('.plus');
-// const counterDisplayElement1 = document.querySelector('.count1');
-// const counterDisplayElement2 = document.querySelector('.count2');
-// const counterDisplayElement3 = document.querySelector('.count3');
-//
-// minusBtns[0].addEventListener('click', () => {
-//     if (counterDisplayElement1.textContent !==`${0}`) {
-//         counterDisplayElement1.textContent = `${counterDisplayElement1.textContent - 1}`;
-//     }
-//
-//     // if (counterDisplayElement1.textContent === `${0}`) {
-//     //     minusBtns[0].style.backgroundColor = '#CECECE';
-//     // }
-//     // if (counterDisplayElement1.textContent !==`${30}`) {
-//     //     plusBtns[0].style.backgroundColor = '#3077C6';
-//     // }
-//     formLabelAdults.textContent = `${counterDisplayElement1.textContent} Adults`
-// })
-// // minusBtns[1].addEventListener('click', () => {
-// //     if (counterDisplayElement.textContent !==`${0}`) {
-// //         counterDisplayElement.textContent = `${counterDisplayElement - 1}`;
-// //     }
-// //
-// //     if (counterDisplayElement.textContent === `${0}`) {
-// //         minusBtns[1].style.color = '#CECECE';
-// //     }
-// //     if (counterDisplayElement.textContent !==`${30}`) {
-// //         plusBtns[1].style.color = '#3077C6';
-// //     }
-// //     formLabelChildren.textContent = `${counterDisplayElement.textContent} Children`
-// // })
-// // minusBtns[2].addEventListener('click', () => {
-// //     if (counterDisplayElement.textContent !==`${0}`) {
-// //         counterDisplayElement.textContent = `${counterDisplayElement - 1}`;
-// //     }
-// //
-// //     if (counterDisplayElement.textContent === `${0}`) {
-// //         minusBtns[2].style.color = '#CECECE';
-// //     }
-// //     if (counterDisplayElement.textContent !==`${30}`) {
-// //         plusBtns[2].style.color = '#3077C6';
-// //     }
-// //     formLabelRooms.textContent = `${counterDisplayElement.textContent} Rooms`
-// // })
-//
-// plusBtns[0].addEventListener('click', () => {
-//     if ((Number(counterDisplayElement1.textContent) <=`${30}`) || (counterDisplayElement1.textContent ===`${0}`) ) {
-//         counterDisplayElement1.textContent++;
-//     }
-//
-//     // if (counterDisplayElement1.textContent === `${30}`) {
-//     //     minusBtns[0].style.backgroundColor = '#CECECE';
-//     // }
-//     // if (counterDisplayElement1.textContent !==`${30}`) {
-//     //     plusBtns[0].style.backgroundColor = '#3077C6';
-//     // }
-//     formLabelAdults.textContent = `${counterDisplayElement1.textContent} Adults`
-// })
-// console.log(counterDisplayElement1.textContent)
 
 // // lesson-12
 const homesBody = document.getElementById('homes-body');
