@@ -250,7 +250,9 @@ fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
 
 const availableHotel = document.getElementById('available-hotel');
 const searchButton =document.getElementById('search-button');
-const availableHotelWrapper = document.getElementById('availableWrap')
+const availableHotelWrapper = document.getElementById('availableWrap');
+const removeBlock = document.querySelector('.invisibleWrap');
+
 const submitForm = () => {
     const childrenTagSelect = document.querySelectorAll('.select-age');
     const findHotel = document.getElementById('city-input').value;
@@ -259,8 +261,7 @@ const submitForm = () => {
     for (let i = 0; i < childrenTagSelect.length; i++) {
         childrenYearsArr.push(childrenTagSelect[i].options.selectedIndex);
     }
-
-    fetch('https://fe-student-api.herokuapp.com/api/hotels?search=${findHotel}&adults=${formLabelAdults.innerHTML}&children=${childrenYearsArr.toString()}&rooms=${formLabelRooms.innerHTML}')
+    fetch('https://fe-student-api.herokuapp.com/api/hotels?search=${findHotel}&adults=${formLabelAdults.textContent}&children=${childrenYearsArr.toString()}&rooms=${formLabelRooms.textContent}')
         .then(data => data.text())
         .then(data => {
             return JSON.parse(data);
@@ -273,10 +274,10 @@ const submitForm = () => {
                 <p class="text">${i.name}</p>
                 <p class="text-grey">${i.city}, ${i.country}</p>
                 </div>`).join('');
+            console.log(data)
         })
             .then(data => {
-            availableHotelWrapper.classList.remove('invisibleWrap');
+            removeBlock.style.display = 'block';
             })
 }
-
-submitForm()
+searchButton.addEventListener('click', submitForm)

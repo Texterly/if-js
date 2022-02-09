@@ -500,7 +500,7 @@ body {
 }
 
 .invisibleWrap {
-    overflow: hidden;
+    display: none;
 }
 
 .container-back {
