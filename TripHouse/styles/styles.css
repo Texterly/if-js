@@ -499,6 +499,10 @@ body {
     font-weight: 400;
 }
 
+.invisibleWrap {
+    overflow: hidden;
+}
+
 .container-back {
     background-color: #EAF0F9;
     max-height: 828px;

@@ -62,25 +62,6 @@
 
 // lesson-11
 
-// const adult = document.getElementById('adults');
-// const room = document.getElementById('rooms');
-// const children = document.getElementById('children');
-// const filter = document.getElementById('filter');
-//
-// const openMenu = () => {
-//     adult.onclick = function () {
-//         filter.style.display = "block";
-//     }
-//     children.onclick = function () {
-//         filter.style.display = "block";
-//     }
-//     room.onclick = function () {
-//         filter.style.display = "block";
-//     }
-// }
-//
-// openMenu()
-
 const filter = document.getElementById('filter');
 
 function openHotelMenu(event) {
@@ -114,29 +95,6 @@ const formLabelChildren = document.querySelector('.children-label');
 const formLabelRooms = document.querySelector('.rooms-label');
 
 const filterAgeComment = document.querySelector('.filter-age');
-
-// function createSelect() {
-//     const selectAgeWrapper = document.createElement('div');
-//     selectAgeWrapper.classList.add('select-age-wrapper');
-//     const selectAge = document.createElement('select');
-//     selectAge.setAttribute('name', 'children-age');
-//     selectAge.classList.add('select-age');
-//
-//     for (let i = 0; i < 18; i++) {
-//         const valueOfAge = document.createElement('option');
-//         valueOfAge.setAttribute('value', `value${i} years old`);
-//         valueOfAge.innerHTML = `${i} years old`;
-//         if (i===8) {
-//             valueOfAge.setAttribute('selected', 'selected');
-//         }
-//         selectAge.append(valueOfAge);
-//     }
-//     selectAgeWrapper.append(selectAge);
-//     return selectAgeWrapper
-// }
-//
-// const putSelect = createSelect();
-// filter.append(putSelect)
 
 let counter1 = 0;
 let counter2 = 0;
@@ -271,17 +229,6 @@ allBtns.forEach((button) => button.addEventListener('click', changeCounterAdults
 allBtns.forEach((button) => button.addEventListener('click', changeCounterChildren));
 allBtns.forEach((button) => button.addEventListener('click', changeCounterRooms));
 
-
-// const event = new Event('click');
-// firstPlus.dispatchEvent(event);
-// firstMinus.dispatchEvent(event);
-// secondPlus.dispatchEvent(event);
-// secondMinus.dispatchEvent(event);
-// thirdPlus.dispatchEvent(event);
-// thirdMinus.dispatchEvent(event);
-// document.body.dispatchEvent(event);
-
-
 // // lesson-12
 const homesBody = document.getElementById('homes-body');
 
@@ -298,3 +245,38 @@ fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
     .catch(err => {
         console.log('Fetch Error :-S', err);
     });
+
+// lesson-12.2
+
+const availableHotel = document.getElementById('available-hotel');
+const searchButton =document.getElementById('search-button');
+const availableHotelWrapper = document.getElementById('availableWrap')
+const submitForm = () => {
+    const childrenTagSelect = document.querySelectorAll('.select-age');
+    const findHotel = document.getElementById('city-input').value;
+    const childrenYearsArr = [];
+
+    for (let i = 0; i < childrenTagSelect.length; i++) {
+        childrenYearsArr.push(childrenTagSelect[i].options.selectedIndex);
+    }
+
+    fetch('https://fe-student-api.herokuapp.com/api/hotels?search=${findHotel}&adults=${formLabelAdults.innerHTML}&children=${childrenYearsArr.toString()}&rooms=${formLabelRooms.innerHTML}')
+        .then(data => data.text())
+        .then(data => {
+            return JSON.parse(data);
+        })
+        .then(data => {
+            const availableHotelsBody = document.getElementById('available-hotel');
+            availableHotelsBody.innerHTML = data.map(i =>
+                `<div class="container-blocks">
+                <img src="${i.imageUrl}" alt="${i.name}">
+                <p class="text">${i.name}</p>
+                <p class="text-grey">${i.city}, ${i.country}</p>
+                </div>`).join('');
+        })
+            .then(data => {
+            availableHotelWrapper.classList.remove('invisibleWrap');
+            })
+}
+
+submitForm()
