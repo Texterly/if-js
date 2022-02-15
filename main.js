@@ -908,15 +908,43 @@
 // alert(arr[1].name); // Маша
 // alert(arr[2].name); // Петя
 
-// Задача5
-let vasya = { name: "Вася", age: 25 };
-let petya = { name: "Петя", age: 30 };
-let masha = { name: "Маша", age: 29 };
+// // Задача5
+// let vasya = { name: "Вася", age: 25 };
+// let petya = { name: "Петя", age: 30 };
+// let masha = { name: "Маша", age: 29 };
+//
+// let arr = [ vasya, petya, masha ];
+//
+// function getAverageAge(users) {
+//   return users.reduce((prev, user) => prev + user.age, 0) / users.length;
+// }
+//
+// console.log( getAverageAge(arr) ); // (25 + 30 + 29) / 3 = 28
 
-let arr = [ vasya, petya, masha ];
+// lesson-14
+// const form1 = document.getElementById('form');
+// console.log(form1)
+// form1.addEventListener('submit', async event => {
+//   event.preventDefault();
+//
+//   const fetchOptions = {
+//     method: 'POST',
+//     body: new FormData(form1),
+//     headers: {
+//       'Content-Type': 'multipart/form-data'
+//     },
+//   };
+//
+//   const res =  await fetch(`https://fe-student-api.herokuapp.com/api/file`, fetchOptions)
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error(response.statusText);
+//         }
+//
+//         return response.json();
+//       })
+//       .then(result => result)
+//       .catch(error => console.log(error.massage));
+//   console.log(res);
+// });
 
-function getAverageAge(users) {
-  return users.reduce((prev, user) => prev + user.age, 0) / users.length;
-}
-
-console.log( getAverageAge(arr) ); // (25 + 30 + 29) / 3 = 28

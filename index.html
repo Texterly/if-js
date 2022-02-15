@@ -9,11 +9,21 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <p id="text1">Text 1</p>
-    <p id="text2">Text 2</p>
-    <p id="text3">Text 3</p>
+<!--    <p id="text1">Text 1</p>-->
+<!--    <p id="text2">Text 2</p>-->
+<!--    <p id="text3">Text 3</p>-->
 
-    <script>
+<!--    lesson-14-->
+
+<form id="form" class="form">
+    <input type="text" name="name" value="John">
+    <input type="text" name="surname" value="Smith">
+    <input type="file" name="file">
+    <button type="submit">Send</button>
+</form>
+
+
+<script>
         // const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
 
         // let getPainted = function () {
@@ -31,35 +41,61 @@
         // document.getElementById("text2").addEventListener("click", getPainted());
         // document.getElementById("text3").addEventListener("click", getPainted());
 
-        // lesson-9
-        const colors = {
-            data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
-            [Symbol.iterator]() {
-                const arr = this.data;
-                return {
-                    next(index) {
-                        return {
-                            value: arr[index],
-                            done: index === arr.length,
-                        };
-                    },
-                };
-            },
-        };
-        function changeStyle() {
-            let i = 0;
-            return function () {
-                let iterator = colors[Symbol.iterator]();
-                this.style.color = iterator.next(i).value;
-                i++;
-                if (iterator.next(i).done) {
-                    i = 0;
-                }
+        // // lesson-9
+        // const colors = {
+        //     data: ["magenta", "cyan", "firebrick", "springgreen", "skyblue"],
+        //     [Symbol.iterator]() {
+        //         const arr = this.data;
+        //         return {
+        //             next(index) {
+        //                 return {
+        //                     value: arr[index],
+        //                     done: index === arr.length,
+        //                 };
+        //             },
+        //         };
+        //     },
+        // };
+        // function changeStyle() {
+        //     let i = 0;
+        //     return function () {
+        //         let iterator = colors[Symbol.iterator]();
+        //         this.style.color = iterator.next(i).value;
+        //         i++;
+        //         if (iterator.next(i).done) {
+        //             i = 0;
+        //         }
+        //     };
+        // }
+        // document.getElementById("text1").addEventListener("click", changeStyle());
+        // document.getElementById("text2").addEventListener("click", changeStyle());
+        // document.getElementById("text3").addEventListener("click", changeStyle());
+        // lesson-14
+        const form1 = document.getElementById('form');
+        console.log(form1)
+        form1.addEventListener('submit', async event => {
+            event.preventDefault();
+
+            const fetchOptions = {
+                method: 'POST',
+                body: new FormData(form1),
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
             };
-        }
-        document.getElementById("text1").addEventListener("click", changeStyle());
-        document.getElementById("text2").addEventListener("click", changeStyle());
-        document.getElementById("text3").addEventListener("click", changeStyle());
+
+            const res =  await fetch(`https://fe-student-api.herokuapp.com/api/file`, fetchOptions)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.statusText);
+                    }
+
+                    return response.json();
+                })
+                .then(result => result)
+                .catch(error => console.log(error.message));
+            console.log(res);
+        });
     </script>
 </body>
 </html>
