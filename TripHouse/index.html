@@ -67,7 +67,7 @@
             </div>
             <form action="" class="top-form">
                 <div class="city-field">
-                    <input id="city-input" class="city-input" type="text" required>
+                    <input id="city-input" name="city-input" class="city-input" type="text" required>
                     <label class="city-label" for="city-input">Your destination or hotel name</label>
                     <div>
                         <svg class="city-field-button" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,29 +79,29 @@
                     <div class="button-container">
                         <div class="calendar">
                             <div class="calendar-before-date">
-                                <input id="calendar-before" class="calendar-before-input" type="text" required>
+                                <input name="calendar-b" id="calendar-before" class="calendar-before-input" type="text">
                                 <label class="calendar-label-before" for="calendar-before">Check in</label>
                             </div>
                             <div class="calendar-after-date">
-                                <input id="calendar-after" class="calendar-after-input" type="text" required>
+                                <input name="calendar-a" id="calendar-after" class="calendar-after-input" type="text">
                                 <label class="calendar-label-after" for="calendar-after">Check out</label>
                             </div>
                         </div>
                         <div class="properties properties-border-color" id="properties">
                             <div class="adults properties-border">
-                                <input id="adults" class="adults-input" type="text" required>
+                                <input name="adults" id="adults" class="adults-input" type="text" required>
                                 <label class="adults-label" for="adults">Adults</label>
                             </div>
                             <div class="children properties-border">
-                                <input id="children" class="children-input" type="text" required>
+                                <input name="children" id="children" class="children-input" type="text" required>
                                 <label class="children-label" for="children">Children</label>
                             </div>
                             <div class="rooms properties-border">
-                                <input id="rooms" class="rooms-input" type="text" required>
+                                <input name="rooms" id="rooms" class="rooms-input" type="text" required>
                                 <label class="rooms-label" for="rooms">Rooms</label>
                             </div>
                         </div>
-                        <button type="submit" class="search-button" id="search-button">Search</button>
+                        <button type="button" class="search-button" id="search-button">Search</button>
                     </div>
                 </div>
             </form>

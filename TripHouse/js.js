@@ -90,15 +90,18 @@ const secondPlus = document.querySelector('.second-plus');
 const thirdMinus = document.querySelector('.third-minus');
 const thirdPlus =document.querySelector('.third-plus');
 
-const formLabelAdults = document.querySelector('.adults-label');
-const formLabelChildren = document.querySelector('.children-label');
-const formLabelRooms = document.querySelector('.rooms-label');
+const formInputAdults = document.querySelector('.adults-input');
+const formInputChildren = document.querySelector('.children-input');
+const formInputRooms = document.querySelector('.rooms-input');
 
 const filterAgeComment = document.querySelector('.filter-age');
 
 let counter1 = 0;
 let counter2 = 0;
 let counter3 = 0;
+let searchAdults = '';
+let searchAdults2;
+let searchData = [];
 
 function changeCounterAdults(event) {
         if ((event.target.closest('.first-minus')) || event.target.closest('.first-plus')) {
@@ -128,12 +131,11 @@ function changeCounterAdults(event) {
             function updateDisplay() {
                 if ((counter1 !== -1) && (counter1 !== 31)) {
                     counterDisplayElement.innerHTML = counter1;
-                    formLabelAdults.innerHTML = `${counter1} Adults`;
+                    formInputAdults.value = `${counter1} Adults`;
                 }
             }
         }
 }
-
 function changeCounterChildren(event) {
     if ((event.target.closest('.second-minus')) || event.target.closest('.second-plus')) {
         countChildren(event);
@@ -177,7 +179,7 @@ function changeCounterChildren(event) {
         function updateDisplay() {
             if ((counter2 !== -1) && (counter2 !== 11)) {
                 counterDisplayElement1.innerHTML = counter2;
-                formLabelChildren.innerHTML = `${counter2} Children`;
+                formInputChildren.value = `${counter2} Children`;
                 const selectNumber = counterDisplayElement1.innerHTML;
 
                 if (selectNumber > 0) {
@@ -219,7 +221,7 @@ function changeCounterRooms(event) {
         function updateDisplay() {
             if ((counter3 !== -1) && (counter3 !== 31)) {
                 counterDisplayElement2.innerHTML = counter3;
-                formLabelRooms.innerHTML = `${counter3} Rooms`;
+                formInputRooms.value = `${counter3} Rooms`;
             }
         }
     }
@@ -234,6 +236,7 @@ const homesBody = document.getElementById('homes-body');
 
 fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
     .then(response => response.json())
+
     .then(data => {
         homesBody.innerHTML = data.map(i =>
             `<div class="container-blocks">
@@ -246,38 +249,54 @@ fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
         console.log('Fetch Error :-S', err);
     });
 
-// lesson-12.2
+// lesson-12.2 and lesson-13
 
 const availableHotel = document.getElementById('available-hotel');
 const searchButton =document.getElementById('search-button');
 const availableHotelWrapper = document.getElementById('availableWrap');
 const removeBlock = document.querySelector('.invisibleWrap');
 
-const submitForm = () => {
-    const childrenTagSelect = document.querySelectorAll('.select-age');
-    const findHotel = document.getElementById('city-input').value;
-    const childrenYearsArr = [];
+let searchChildren = '';
 
+const submitForm = () => {
+    const findHotel = document.querySelector('.city-input').value;
+    const searchAdults = formInputAdults.value;
+    let finalSearchAdults = searchAdults[0];
+    const searchRooms = formInputRooms.value;
+    let finalSearchRooms = searchRooms[0];
+    const childrenTagSelect = document.querySelectorAll('.select-age');
+    const childrenYearsArr = [];
     for (let i = 0; i < childrenTagSelect.length; i++) {
         childrenYearsArr.push(childrenTagSelect[i].options.selectedIndex);
     }
-    fetch('https://fe-student-api.herokuapp.com/api/hotels?search=${findHotel}&adults=${formLabelAdults.textContent}&children=${childrenYearsArr.toString()}&rooms=${formLabelRooms.textContent}')
-        .then(data => data.text())
-        .then(data => {
-            return JSON.parse(data);
-        })
-        .then(data => {
+    for (let i = 0; i < childrenYearsArr.length; i++) {
+        searchChildren += `${childrenYearsArr[i]},`
+    }
+    const finalSearchChildren = searchChildren.slice(0, -1);
+    fetch(`https://fe-student-api.herokuapp.com/api/hotels?search=${findHotel}&adults=${finalSearchAdults}&children=${finalSearchChildren}&rooms=${finalSearchRooms}`)
+        .then((response) => (response.json()))
+        .then((data) => {
+            let result = data;
+            let dataStorage = JSON.stringify(data);
+            sessionStorage.setItem('dataSession', dataStorage);
+            const getHotels = sessionStorage.getItem('dataSession');
+            const newHotel = JSON.parse(getHotels);
             const availableHotelsBody = document.getElementById('available-hotel');
-            availableHotelsBody.innerHTML = data.map(i =>
+            availableHotelsBody.innerHTML = newHotel.map(i =>
                 `<div class="container-blocks">
                 <img src="${i.imageUrl}" alt="${i.name}">
                 <p class="text">${i.name}</p>
                 <p class="text-grey">${i.city}, ${i.country}</p>
                 </div>`).join('');
-            console.log(data)
+                removeBlock.style.display = 'block';
         })
-            .then(data => {
+        .catch(data => {availableHotelsBody.innerHTML = data.map(i =>
+            `<div class="container-blocks">
+                <img src="${i.imageUrl}" alt="${i.name}">
+                <p class="text">${i.name}</p>
+                <p class="text-grey">${i.city}, ${i.country}</p>
+                </div>`).join('');
             removeBlock.style.display = 'block';
-            })
+        });
 }
 searchButton.addEventListener('click', submitForm)
