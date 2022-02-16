@@ -233,21 +233,34 @@ allBtns.forEach((button) => button.addEventListener('click', changeCounterRooms)
 
 // // lesson-12
 const homesBody = document.getElementById('homes-body');
-
-fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
-    .then(response => response.json())
-
-    .then(data => {
-        homesBody.innerHTML = data.map(i =>
-            `<div class="container-blocks">
+if (sessionStorage.getItem('dataSession') !== null ) {
+    const getHotels = sessionStorage.getItem('dataSession');
+    const newHotel = JSON.parse(getHotels);
+    homesBody.innerHTML = newHotel.map(i =>
+        `<div class="container-blocks">
             <img src="${i.imageUrl}" alt="${i.name}">
             <p class="text">${i.name}</p>
             <p class="text-grey">${i.city}, ${i.country}</p>
             </div>`).join('');
-    })
-    .catch(err => {
-        console.log('Fetch Error :-S', err);
-    });
+} else {
+    fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
+        .then(response => response.json())
+        .then(data => {
+                let dataStorage = JSON.stringify(data);
+                sessionStorage.setItem('dataSession', dataStorage);
+                const getHotels = sessionStorage.getItem('dataSession');
+                const newHotel = JSON.parse(getHotels);
+                homesBody.innerHTML = newHotel.map(i =>
+                    `<div class="container-blocks">
+            <img src="${i.imageUrl}" alt="${i.name}">
+            <p class="text">${i.name}</p>
+            <p class="text-grey">${i.city}, ${i.country}</p>
+            </div>`).join('');
+        })
+        .catch(err => {
+            console.log('Fetch Error :-S', err);
+        });
+}
 
 // lesson-12.2 and lesson-13
 
@@ -257,6 +270,7 @@ const availableHotelWrapper = document.getElementById('availableWrap');
 const removeBlock = document.querySelector('.invisibleWrap');
 
 let searchChildren = '';
+let howMuchChildren;
 
 const submitForm = () => {
     const findHotel = document.querySelector('.city-input').value;
@@ -269,6 +283,11 @@ const submitForm = () => {
     for (let i = 0; i < childrenTagSelect.length; i++) {
         childrenYearsArr.push(childrenTagSelect[i].options.selectedIndex);
     }
+    howMuchChildren = childrenYearsArr.length;
+    if ((howMuchChildren > 0) && finalSearchAdults ==0) {
+        alert('Дети не могут путешествовать без взрослых')
+    }
+    console.log(childrenYearsArr.length)
     for (let i = 0; i < childrenYearsArr.length; i++) {
         searchChildren += `${childrenYearsArr[i]},`
     }
@@ -276,13 +295,8 @@ const submitForm = () => {
     fetch(`https://fe-student-api.herokuapp.com/api/hotels?search=${findHotel}&adults=${finalSearchAdults}&children=${finalSearchChildren}&rooms=${finalSearchRooms}`)
         .then((response) => (response.json()))
         .then((data) => {
-            let result = data;
-            let dataStorage = JSON.stringify(data);
-            sessionStorage.setItem('dataSession', dataStorage);
-            const getHotels = sessionStorage.getItem('dataSession');
-            const newHotel = JSON.parse(getHotels);
             const availableHotelsBody = document.getElementById('available-hotel');
-            availableHotelsBody.innerHTML = newHotel.map(i =>
+            availableHotelsBody.innerHTML = data.map(i =>
                 `<div class="container-blocks">
                 <img src="${i.imageUrl}" alt="${i.name}">
                 <p class="text">${i.name}</p>
@@ -290,13 +304,8 @@ const submitForm = () => {
                 </div>`).join('');
                 removeBlock.style.display = 'block';
         })
-        .catch(data => {availableHotelsBody.innerHTML = data.map(i =>
-            `<div class="container-blocks">
-                <img src="${i.imageUrl}" alt="${i.name}">
-                <p class="text">${i.name}</p>
-                <p class="text-grey">${i.city}, ${i.country}</p>
-                </div>`).join('');
-            removeBlock.style.display = 'block';
+        .catch(err => {
+            console.log('Fetch Error :-S', err);
         });
 }
 searchButton.addEventListener('click', submitForm)

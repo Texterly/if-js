@@ -79,9 +79,6 @@
             const fetchOptions = {
                 method: 'POST',
                 body: new FormData(form1),
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
             };
 
             const res =  await fetch(`https://fe-student-api.herokuapp.com/api/file`, fetchOptions)
