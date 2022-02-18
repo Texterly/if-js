@@ -326,6 +326,7 @@ body {
 .header-apps {
     display: flex;
     justify-content: center;
+    position: relative;
 }
 
 .header-apps div {
@@ -333,6 +334,91 @@ body {
     margin-right: 8px;
 }
 
+#filter {
+    display: none;
+}
+
+.filter {
+    /*display: none;*/
+    width: 259px;
+    max-height: 264px;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: -106px;
+    right: 182px;
+    border-radius: 8px;
+    overflow-y: scroll;
+}
+
+.filter div {
+    margin: 0;
+}
+
+.filter-top {
+    display: flex;
+    color: #000000;
+    font-family: "Roboto", "Arial", sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+.filter-top-box {
+    margin-top: 20px;
+}
+
+.filter-top-box svg {
+    margin-bottom: 12px;
+}
+
+.filter-top-box div {
+    margin: 0;
+}
+
+.filter-top-box:first-child {
+    width: 49.8%;
+    margin-top: 28px;
+    margin-left: 22px;
+}
+
+.filter-top-box p {
+    margin-bottom: 25px;
+}
+
+.filter-top-box:nth-child(2) {
+    width: 18.9%;
+    margin-top: 22px;
+}
+
+.filter-top-box:nth-child(3) {
+    width: 11.2%;
+    margin-top: 28px;
+}
+
+.filter-top-box:last-child {
+    width: 20%;
+    margin-top: 22px;
+}
+
+.filter-age {
+    color: #000000;
+    font-size: 12px;
+    display: none;
+}
+
+.filter-age p {
+    margin: 16px 22px 12px 19px;
+}
+
+.select-age {
+    width: 100px;
+    height: 30px;
+    margin: 12px 0 22px 18px;
+    border-color: #3077C6;
+}
+
+/*.rect-color {*/
+/*    stroke: #F5BD41;*/
+/*    fill: #F5BD41;*/
+/*}*/
 .section1 {
     padding: 120px 104px;
     max-height: 570px;
@@ -413,6 +499,10 @@ body {
     font-weight: 400;
 }
 
+.invisibleWrap {
+    display: none;
+}
+
 .container-back {
     background-color: #EAF0F9;
     max-height: 828px;
@@ -429,12 +519,19 @@ body {
 
 .container-blocks {
     width: 25%;
+    padding-right: 16px;
+}
+
+.container-blocks img {
+    width: 296px;
+    height: 296px;
 }
 
 .homes {
     display: flex;
     justify-content: space-between;
     margin-top: 104px;
+    overflow: hidden;
 }
 
 .container-blocks .text {

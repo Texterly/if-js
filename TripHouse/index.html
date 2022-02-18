@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>lesson-5</title>
-    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -67,7 +67,7 @@
             </div>
             <form action="" class="top-form">
                 <div class="city-field">
-                    <input id="city-input" class="city-input" type="text" required>
+                    <input id="city-input" name="city-input" class="city-input" type="text" required>
                     <label class="city-label" for="city-input">Your destination or hotel name</label>
                     <div>
                         <svg class="city-field-button" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,29 +79,29 @@
                     <div class="button-container">
                         <div class="calendar">
                             <div class="calendar-before-date">
-                                <input id="calendar-before" class="calendar-before-input" type="text" required>
+                                <input name="calendar-b" id="calendar-before" class="calendar-before-input" type="text">
                                 <label class="calendar-label-before" for="calendar-before">Check in</label>
                             </div>
                             <div class="calendar-after-date">
-                                <input id="calendar-after" class="calendar-after-input" type="text" required>
+                                <input name="calendar-a" id="calendar-after" class="calendar-after-input" type="text">
                                 <label class="calendar-label-after" for="calendar-after">Check out</label>
                             </div>
                         </div>
-                        <div class="properties">
+                        <div class="properties properties-border-color" id="properties">
                             <div class="adults properties-border">
-                                <input id="adults" class="adults-input" type="text" required>
+                                <input name="adults" id="adults" class="adults-input" type="text" required>
                                 <label class="adults-label" for="adults">Adults</label>
                             </div>
                             <div class="children properties-border">
-                                <input id="children" class="children-input" type="text" required>
+                                <input name="children" id="children" class="children-input" type="text" required>
                                 <label class="children-label" for="children">Children</label>
                             </div>
                             <div class="rooms properties-border">
-                                <input id="rooms" class="rooms-input" type="text" required>
+                                <input name="rooms" id="rooms" class="rooms-input" type="text" required>
                                 <label class="rooms-label" for="rooms">Rooms</label>
                             </div>
                         </div>
-                        <button type="submit" class="search-button">Search</button>
+                        <button type="button" class="search-button" id="search-button">Search</button>
                     </div>
                 </div>
             </form>
@@ -111,6 +111,76 @@
                 </div>
                 <div>
                     <img src="./images/App_Store_Badge_US-UK_RGB_blk_092917%201.png" alt="App store">
+                </div>
+                <div class="filter" id="filter">
+                    <div class="filter-top">
+                        <div class="filter-top-box">
+                            <p>Adults</p>
+                            <p>Children</p>
+                            <p>Rooms</p>
+                        </div>
+                        <div class="filter-top-box">
+                            <div class="first-minus btn-filter minus">
+                                <svg  width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <rect class="rect-color" x="0.5" y="0.5" width="29" height="29" fill="white" stroke="#3077C6"/>
+                                        <path  d="M19.3242 16.2783H10.5176V14.9512H19.3242V16.2783Z" fill="#3077C6"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="second-minus btn-filter minus">
+                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <rect x="0.5" y="0.5" width="29" height="29" fill="white" stroke="#3077C6"/>
+                                        <path d="M19.3242 16.2783H10.5176V14.9512H19.3242V16.2783Z" fill="#3077C6"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="third-minus btn-filter minus">
+                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <rect x="0.5" y="0.5" width="29" height="29" fill="white" stroke="#3077C6"/>
+                                        <path d="M19.3242 16.2783H10.5176V14.9512H19.3242V16.2783Z" fill="#3077C6"/>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="filter-top-box">
+                            <p class="count1">0</p>
+                            <p class="count2">0</p>
+                            <p class="count3">1</p>
+                        </div>
+                        <div class="filter-top-box">
+                            <div class="btn-filter plus first-plus">
+                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <rect x="0.5" y="0.5" width="29" height="29" fill="white" stroke="#3077C6"/>
+                                        <path d="M16.2822 15.1357H19.8506V16.6738H16.2822V20.7168H14.6475V16.6738H11.0791V15.1357H14.6475V11.4004H16.2822V15.1357Z" fill="#3077C6"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="second-plus btn-filter plus">
+                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <rect x="0.5" y="0.5" width="29" height="29" fill="white" stroke="#3077C6"/>
+                                        <path d="M16.2822 15.1357H19.8506V16.6738H16.2822V20.7168H14.6475V16.6738H11.0791V15.1357H14.6475V11.4004H16.2822V15.1357Z" fill="#3077C6"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="third-plus btn-filter plus">
+                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <rect x="0.5" y="0.5" width="29" height="29" fill="white" stroke="#3077C6"/>
+                                        <path d="M16.2822 15.1357H19.8506V16.6738H16.2822V20.7168H14.6475V16.6738H11.0791V15.1357H14.6475V11.4004H16.2822V15.1357Z" fill="#3077C6"/>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-age">
+                        <p>What is the age of the child you’re travelling with?</p>
+                    </div>
+                    <div></div>
                 </div>
             </div>
         </div>
@@ -168,6 +238,26 @@
         </div>
     </div>
 </div>
+
+<div class="container-back invisibleWrap" id="availableWrap">
+    <div class="section">
+        <div class="container">
+            <div class="header-text">
+                <p class="text-primary">Available hotels</p>
+            </div>
+            <div class="homes" id="available-hotel">
+
+            </div>
+            <div class="homes-button">
+                <img class="arrow" src="./images/arrow_right.png" alt="arrow">
+            </div>
+            <div class="homes-button">
+                <img class="arrow-left" src="./images/arrow_right.png" alt="arrow">
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container-back">
     <div class="section">
         <div class="container">
@@ -175,7 +265,6 @@
                 <p class="text-primary">Homes guests loves</p>
             </div>
             <div class="homes" id="homes-body">
-
 <!--                <div class="container-blocks col-6 col-s-12">-->
 <!--                    <img src="./images/hotel_leopold.png" alt="Hotel Leopold">-->
 <!--                    <p class="text">Hotel Leopold</p>-->

@@ -783,6 +783,7 @@ $sizes: ("xs":480px, "md":768px, "lg":1024px);
                 display: flex;
                 justify-content: space-between;
                 margin-top: 104px;
+                overflow: hidden;
                 @media screen and (max-width: 1024px) {
                     flex-wrap: wrap;
                     margin-top: 48px;
