@@ -231,12 +231,27 @@ allBtns.forEach((button) => button.addEventListener('click', changeCounterAdults
 allBtns.forEach((button) => button.addEventListener('click', changeCounterChildren));
 allBtns.forEach((button) => button.addEventListener('click', changeCounterRooms));
 
-// // lesson-12
+// // lesson-12 and lesson-15
+const bubbleSort = (arr, name) => {
+    for (let i = 0, endI = arr.length - 1; i < endI; i++) {
+        let wasSwap = false;
+        for (let j = 0, endJ = endI - i; j < endJ; j++) {
+            if (arr[j][name] > arr[j + 1][name]) {
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                wasSwap = true;
+            }
+        }
+        if (!wasSwap) break;
+    }
+    return arr;
+};
+
 const homesBody = document.getElementById('homes-body');
-if (sessionStorage.getItem('dataSession') !== null ) {
+if (sessionStorage.getItem('dataSession') == null ) {
     const getHotels = sessionStorage.getItem('dataSession');
     const newHotel = JSON.parse(getHotels);
-    homesBody.innerHTML = newHotel.map(i =>
+    const sortNewHotel = bubbleSort(newHotel, 'name');
+    homesBody.innerHTML = sortNewHotel.map(i =>
         `<div class="container-blocks">
             <img src="${i.imageUrl}" alt="${i.name}">
             <p class="text">${i.name}</p>
@@ -250,7 +265,8 @@ if (sessionStorage.getItem('dataSession') !== null ) {
                 sessionStorage.setItem('dataSession', dataStorage);
                 const getHotels = sessionStorage.getItem('dataSession');
                 const newHotel = JSON.parse(getHotels);
-                homesBody.innerHTML = newHotel.map(i =>
+                const sortNewHotel = bubbleSort(newHotel, 'name');
+                homesBody.innerHTML = sortNewHotel.map(i =>
                     `<div class="container-blocks">
             <img src="${i.imageUrl}" alt="${i.name}">
             <p class="text">${i.name}</p>
@@ -268,11 +284,10 @@ const availableHotel = document.getElementById('available-hotel');
 const searchButton =document.getElementById('search-button');
 const availableHotelWrapper = document.getElementById('availableWrap');
 const removeBlock = document.querySelector('.invisibleWrap');
-
-let searchChildren = '';
 let howMuchChildren;
 
 const submitForm = () => {
+    let searchChildren = '';
     const findHotel = document.querySelector('.city-input').value;
     const searchAdults = formInputAdults.value;
     let finalSearchAdults = searchAdults[0];
