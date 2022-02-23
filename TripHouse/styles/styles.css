@@ -532,6 +532,8 @@ body {
     justify-content: space-between;
     margin-top: 104px;
     overflow: hidden;
+    position: relative;
+    left: 0;
 }
 
 .container-blocks .text {
@@ -549,8 +551,26 @@ body {
 .arrow {
     filter: drop-shadow(3px 3px 3px #383838);
     position: absolute;
-    bottom: 256px;
+    bottom: 224px;
     left: 1208px;
+}
+
+.arrow:hover {
+    background-color: #F5BD41;
+}
+/*.homes-button-next {*/
+/*    position: absolute;*/
+/*    bottom: 224px;*/
+/*    left: 1208px;*/
+/*    width: 48px;*/
+/*    height: 48px;*/
+/*}*/
+
+.arrow-left {
+    position: absolute;
+    left: -22px;
+    bottom: 224px;
+    transform: rotate(180deg);
 }
 
 .destinations {

@@ -248,6 +248,12 @@ const bubbleSort = (arr, name) => {
 
 const homesBody = document.getElementById('homes-body');
 if (sessionStorage.getItem('dataSession') == null ) {
+    fetch('https://fe-student-api.herokuapp.com/api/hotels/popular')
+        .then(response => response.json())
+        .then(data => {
+            let dataStorage = JSON.stringify(data);
+            sessionStorage.setItem('dataSession', dataStorage);
+        })
     const getHotels = sessionStorage.getItem('dataSession');
     const newHotel = JSON.parse(getHotels);
     const sortNewHotel = bubbleSort(newHotel, 'name');
@@ -323,4 +329,19 @@ const submitForm = () => {
             console.log('Fetch Error :-S', err);
         });
 }
-searchButton.addEventListener('click', submitForm)
+searchButton.addEventListener('click', submitForm);
+
+const homes = document.querySelector('#homes-body');
+console.log(homes)
+let offset = 0;
+const leftArrow = document.querySelector('.arrow');
+console.log(leftArrow)
+leftArrow.addEventListener('click', function () {
+    offset += 400;
+    homes.style.left = offset + 'px';
+});
+
+// document.querySelector('.arrow-left').addEventListener('click', function () {
+//     offset += 400;
+//     homes.style.left = -offset + 'px';
+// });
