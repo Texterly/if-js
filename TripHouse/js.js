@@ -332,16 +332,20 @@ const submitForm = () => {
 searchButton.addEventListener('click', submitForm);
 
 const homes = document.querySelector('#homes-body');
-console.log(homes)
 let offset = 0;
-const leftArrow = document.querySelector('.arrow');
-console.log(leftArrow)
-leftArrow.addEventListener('click', function () {
-    offset += 400;
-    homes.style.left = offset + 'px';
-});
 
-// document.querySelector('.arrow-left').addEventListener('click', function () {
-//     offset += 400;
-//     homes.style.left = -offset + 'px';
-// });
+document.querySelector('#arrow').onclick = () => {
+    offset += 306;
+    if (offset > 1224) {
+        offset = 0;
+    }
+    homes.style.left = -offset + 'px';
+}
+
+document.querySelector('#arrow-left').onclick = () => {
+    offset -= 306;
+    if (offset < 0) {
+        offset = 1224;
+    }
+    homes.style.left = -offset + 'px';
+}

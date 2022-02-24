@@ -515,6 +515,7 @@ body {
     margin: 0 auto;
     box-sizing: content-box;
     position: relative;
+    overflow: hidden;
 }
 
 .container-blocks {
@@ -531,9 +532,10 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: 104px;
-    overflow: hidden;
+    /*overflow: hidden;*/
     position: relative;
     left: 0;
+    transition: all ease 1s;
 }
 
 .container-blocks .text {
@@ -550,26 +552,15 @@ body {
 
 .arrow {
     filter: drop-shadow(3px 3px 3px #383838);
-    position: absolute;
-    bottom: 224px;
-    left: 1208px;
+    position: relative;
+    left: 1262px;
+    bottom: 264px;
 }
-
-.arrow:hover {
-    background-color: #F5BD41;
-}
-/*.homes-button-next {*/
-/*    position: absolute;*/
-/*    bottom: 224px;*/
-/*    left: 1208px;*/
-/*    width: 48px;*/
-/*    height: 48px;*/
-/*}*/
 
 .arrow-left {
-    position: absolute;
-    left: -22px;
-    bottom: 224px;
+    position: relative;
+    left: 38px;
+    bottom: 322px;
     transform: rotate(180deg);
 }
 
