@@ -948,3 +948,37 @@
 //   console.log(res);
 // });
 
+// lesson-15
+
+
+// let obj2 = {user: {name: }{"John", age: 21{}};
+
+// lesson-15
+let obj1 = {user: {name: "John", age: 21}};
+let obj2 = `{user: {name: }{"John", age: 21{}}`;
+
+function isValid(str) {
+    let stack = [];
+    let brackets = {
+        '}': '{',
+    };
+
+    for (let i = 0; i < str.length; i++) {
+        const current = str[i];
+
+        if  (isCloseBracket(current)) {
+            if (brackets[current] !== stack.pop()) return false;
+        } else {
+            stack.push(current);
+        }
+    }
+
+    return  stack.length === 0;
+}
+
+function isCloseBracket (ch) {
+    return ['}'].indexOf(ch) > -1;
+}
+
+console.log(obj1, isValid(obj1));
+console.log(obj2, isValid(obj2));
